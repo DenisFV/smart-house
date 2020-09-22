@@ -1,0 +1,49 @@
+info.app:
+  name: Smart House
+  description: API for management such as a washing machine or oven
+  version: 1.0
+
+server:
+  port: 9090
+  address: localhost
+  tomcat.protocol-header-https-value: http
+
+spring:
+  application.name: smart_house
+  output.ansi.enabled: ALWAYS
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/smart_house?currentSchema=smart_house
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: root
+
+  jpa:
+    show-sql: true
+    hibernate.ddl-auto: none
+    generate-ddl: false
+    open-in-view: true
+    properties.hibernate:
+      format_sql: true
+      use_sql_comments: true
+      max_fetch_depth: 3
+      temp.use_jdbc_metadata_defaults: false
+      connection.autocommit: false
+      jdbc:
+        batch_size: 10
+        fetch_size: 50
+        lob.non_contextual_creation: true
+      dialect: org.hibernate.dialect.PostgreSQL95Dialect
+      id.new_generator_mappings: true
+
+  freemarker.expose-request-attributes: true
+
+  main:
+    allow-bean-definition-overriding: true
+
+logging:
+  level:
+    com:
+      memorynotfound: info
+  pattern:
+    console: "%style{${info.app.name}}{yellow}%style{[${hostName}]}{magenta} %style{%d{yyyy-MM-dd}}{blue} %d{HH:mm:ss.SSS} %highlight{${LOG_LEVEL_PATTERN:-%5p}} %style{%c{1.}}{cyan} - %msg%n"
